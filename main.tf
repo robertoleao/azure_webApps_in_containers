@@ -1,56 +1,23 @@
-# Use the Azure Resource Manager Provider
+# Provedor Terraform Azure
 provider "azurerm" {
   version = "~> 2.0"
   features {}
 }
 
-# Create a new Resource Group
-resource "azurerm_resource_group" "group" {
-  name     = "pdtsamplecontwebapp"
-  location = "westus"
-}
-
-# Create an App Service Plan with Linux
-resource "azurerm_app_service_plan" "appserviceplan" {
-  name                = azurerm_resource_group.group.name
-  location            = azurerm_resource_group.group.location
-  resource_group_name = azurerm_resource_group.group.name
-
-  # Define Linux as Host OS
-  kind = "Linux"
-
-  # Choose size
-  sku {
-    tier = "Standard"
-    size = "S1"
-  }
-
-  #properties = {
-    reserved = true # Mandatory for Linux plans
-  #}
-}
-
-# Create an Azure Web App for Containers in that App Service Plan
+# Criar no Azure Web App um containers com o App Service
 resource "azurerm_app_service" "webappcontapp" {
   name                = azurerm_resource_group.group.name
   location            = azurerm_resource_group.group.location
   resource_group_name = azurerm_resource_group.group.name
   app_service_plan_id = azurerm_app_service_plan.appserviceplan.id
 
-  # Do not attach Storage by default
+  # Não attach Armazanamento padrão
   app_settings = {
     WEBSITES_ENABLE_APP_SERVICE_STORAGE = false
 
-    /*
-    # Settings for private Container Registry - FYI, we won't use this as we grab a sample image from public Docker Hub
-    # private registry could be Azure Container Registry - ACR   
-    DOCKER_REGISTRY_SERVER_URL      = ""
-    DOCKER_REGISTRY_SERVER_USERNAME = ""
-    DOCKER_REGISTRY_SERVER_PASSWORD = ""
-    */
   }
 
-  # Configure Docker Image to load on start
+  # Configurar docker imagem para carregar e iniciar o serviço
   site_config {
     linux_fx_version = "DOCKER|microsoft/aci-helloworld:latest"
     always_on        = "true"
