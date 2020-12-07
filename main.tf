@@ -5,7 +5,7 @@ provider "azurerm" {
 }
 
 # Criar no Azure Web App um containers com o App Service
-resource "azurerm_app_service" "webappcontapp" {
+resource "azurerm_app_service" "web_app_contapp" {
   name                = azurerm_resource_group.group.name
   location            = azurerm_resource_group.group.location
   resource_group_name = azurerm_resource_group.group.name
@@ -19,7 +19,7 @@ resource "azurerm_app_service" "webappcontapp" {
 
   # Configurar docker imagem para carregar e iniciar o serviço
   site_config {
-    linux_fx_version = "DOCKER|pdetender/simplcommerce:latest"
+    linux_fx_version = "DOCKER|pdetender/simplcommerce:latest" # Imagem de um projeto da internet para teste
     always_on        = "true"
   }
 
