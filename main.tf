@@ -19,7 +19,7 @@ resource "azurerm_app_service" "webappcontapp" {
 
   # Configurar docker imagem para carregar e iniciar o serviço
   site_config {
-    linux_fx_version = "DOCKER|microsoft/aci-helloworld:latest"
+    linux_fx_version = "DOCKER|pdetender/simplcommerce:latest"
     always_on        = "true"
   }
 

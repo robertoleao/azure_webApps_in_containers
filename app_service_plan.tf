@@ -7,7 +7,7 @@ resource "azurerm_app_service_plan" "appserviceplan" {
   # Define o SO da maquina
   kind = "Linux"
 
-  # Verão da maquina que rodara o contaner
+  # Configuração da instancia que rodara o contaner
   sku {
     tier = "Standard"
     size = "S1"
