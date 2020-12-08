@@ -2,13 +2,14 @@
 
 ![Capa da materia](cover.jpg "Capa da materia")
 
-Este projeto ajudara a implantar uma instância do Azure WebApp App Service. E ao mesmo tempo, introduz você no Azure WebApp for Containers, onde em vez de publicar o código-fonte do aplicativo, você executa um contêiner Docker . {Neste momento  explicar o codigo}
+Este projeto ajudara a implantar uma instância do Azure WebApp App Service. E ao mesmo tempo, introduz você no Azure WebApp for Containers, onde em vez de publicar o código-fonte do aplicativo, você executa um contêiner Docker .
+
 
 ## app_service_plan.tf
 
 + **azurer_app_service_plan**
 
-    ```
+    ```ruby
     resource "azurerm_app_service_plan" "appserviceplan" {
     name                = azurerm_resource_group.group.name
     location            = azurerm_resource_group.group.location
@@ -35,7 +36,7 @@ Este projeto ajudara a implantar uma instância do Azure WebApp App Service. E a
 
 + **azurerm_resource_group**
 
-    ```
+    ```ruby
     # Cria uma novo Grupo de Recursos
     resource "azurerm_resource_group" "group" {
     name     = "cont_webapp"
@@ -49,7 +50,7 @@ Este projeto ajudara a implantar uma instância do Azure WebApp App Service. E a
 
 + **Provider**
 
-    ```
+    ```ruby
     provider "azurerm" {
     version = "~> 2.0"
     features {}
@@ -60,7 +61,7 @@ Este projeto ajudara a implantar uma instância do Azure WebApp App Service. E a
 
 + **azurerm_app_service**
 
-    ```
+    ```ruby
     # Criar no Azure Web App um containers com o App Service
     resource "azurerm_app_service" "web_app_contapp" {
     name                = azurerm_resource_group.group.name
@@ -79,7 +80,7 @@ Este projeto ajudara a implantar uma instância do Azure WebApp App Service. E a
 
 + **linux_fx_version**
 
-    ```
+    ```ruby
     # Configurar docker imagem para carregar e iniciar o serviço
     site_config {
         linux_fx_version = "DOCKER|pdetender/simplcommerce:latest" # Imagem de um projeto da internet para teste
@@ -88,7 +89,7 @@ Este projeto ajudara a implantar uma instância do Azure WebApp App Service. E a
 
     identity {
         type = "SystemAssigned"
-    }
+        }
     }
     ```
 
