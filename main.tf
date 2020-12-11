@@ -5,7 +5,7 @@ provider "azurerm" {
 }
 
 # Criar no Azure Web App um containers com o App Service
-resource "azurerm_app_service" "web_app_contapp" {
+resource "azurerm_app_service" "webapp" {
   name                = azurerm_resource_group.group.name
   location            = azurerm_resource_group.group.location
   resource_group_name = azurerm_resource_group.group.name
